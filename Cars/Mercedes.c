@@ -6,7 +6,7 @@ void main()
 {
      char audiarr[8][16] = {"GLS","GLE","C-Class","EQS","A-CLass","GLB","CLA","GLA"};
      char selectaudi[10]; 
-     printf("So Here's The List of Audi Cars we are having\n\n");
+     printf("So Here's The List of Mercedes Cars we are having\n\n");
 
      for (int i=0;i<8;i++) printf("%d.  %s\n",i+1,audiarr[i]);
      
