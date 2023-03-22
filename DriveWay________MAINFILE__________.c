@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "Driveway_Backbone\Introduction.c"
+#include "Introduction.c"
 
 void main() {
     char first_name[100], last_name[100], email[100];
