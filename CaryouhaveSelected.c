@@ -1,11 +1,57 @@
 #include <stdio.h>
 #include "AllCars.c"
-#include "test.c"
+#include "userlogin.c"
 
-void changeArray(int arr1[], int arr2[], int size) {
-    for (int i = 0; i < size; i++) {
-        arr1[i] = arr2[i];
+
+void changeArray(int arr1[], int arr2[], int size);
+
+void anothercar(char firstname[100],char lastname[100],char email[100])
+{
+
+printf("\n\nBrands we are having are as follows: \n");
+    char arr[20][20]={"Audi","Bentley","BMW","Bugatti","Chevrolet","Ferrari","Honda","Jaguar","Kia","Lamborghini","Land Rover","Lexus",
+    "Maserati","Mercedes Benz","Porsche","Royal Royace","Tesla","Toyoto","Volkswagon","Volvo"};
+char s[100];
+int m;
+    
+    while (1){
+
+    for (int i=0;i<20;i++) printf("%d. %s\n",i+1,arr[i]);
+    printf("\n\nWe have different models of each brand available as per your choice.\n");
+    printf("\n\nNote :- If you want to exit then type %s\n","exit");
+    printf("\nSo what's your choice: ");
+    scanf("\n%[^\n]%*c",s);
+
+    int t = strlen(s);
+
+    
+    if ((s[0]=='A' || s[0]=='a') && (s[t-1]=='I' || s[t-1]=='i')) {printf("\nYou Chose Audi\n");m=1;break;}
+    else if ((s[0]=='B' || s[0]=='b') && (s[t-1]=='Y' || s[t-1]=='y')) {printf("\nYou Chose Bentley\n");m=2;break;}
+    else if ((s[0]=='B' || s[0]=='b') && (s[t-1]=='W' || s[t-1]=='w')) {printf("\nYou Chose BMW\n");m=3;break;}
+    else if ((s[0]=='B' || s[0]=='b') && (s[t-1]=='I' || s[t-1]=='i')) {printf("\nYou Chose Bugatti\n");m=4;break;}
+    else if ((s[0]=='C' || s[0]=='c') && (s[t-1]=='T' || s[t-1]=='t')) {printf("\nYou Chose Chevrolet\n");m=5;break;}
+    else if ((s[0]=='F' || s[0]=='f') && (s[t-1]=='I' || s[t-1]=='i')) {printf("\nYou Chose Ferrari\n");m=6;break;}
+    else if ((s[0]=='H' || s[0]=='h') && (s[t-1]=='A' || s[t-1]=='a')) {printf("\nYou Chose Honda\n");m=7;break;}
+    else if ((s[0]=='J' || s[0]=='j') && (s[t-1]=='R' || s[t-1]=='r')) {printf("\nYou Chose Jaguar\n");m=8;break;}
+    else if ((s[0]=='K' || s[0]=='k') && (s[t-1]=='a' || s[t-1]=='A')) {printf("\nYou Chose Kia\n");m=9;break;}
+    else if ((s[0]=='L' || s[0]=='l') && (s[t-1]=='I' || s[t-1]=='i')) {printf("\nYou Chose Lamborghini\n");m=10;break;}
+    else if ((s[0]=='L' || s[0]=='l') && (s[t-1]=='R' || s[t-1]=='r')) {printf("\nYou Chose Land Rover\n");m=11;break;}
+    else if ((s[0]=='L' || s[0]=='l') && (s[t-1]=='S' || s[t-1]=='s')) {printf("\nYou Chose Lexus\n");m=12;break;}
+    else if ((s[0]=='M' || s[0]=='m') && (s[t-1]=='I' || s[t-1]=='i')) {printf("\nYou Chose Maserati\n");m=13;break;}
+    else if ((s[0]=='M' || s[0]=='m') && (s[t-1]=='Z' || s[t-1]=='z')) {printf("\nYou Chose Mercedes Benz\n");m=14;break;}
+    else if ((s[0]=='p' || s[0]=='P') && (s[t-1]=='E' || s[t-1]=='e')) {printf("\nYou Chose porsche\n");m=15;break;}
+    else if ((s[0]=='R' || s[0]=='r') && (s[t-1]=='e' || s[t-1]=='E')) {printf("\nYou chose Royal Royace\n");m=16;break;}
+    else if ((s[0]=='T' || s[0]=='t') && (s[t-1]=='A' || s[t-1]=='a')) {printf("\nYou Chose Tesla\n");m=17;break;}
+    else if ((s[0]=='T' || s[0]=='t') && (s[t-1]=='O' || s[t-1]=='o')) {printf("\nYou Chose Toyoto\n");m=18;break;}
+    else if ((s[0]=='V' || s[0]=='v') && (s[t-1]=='N' || s[t-1]=='n')) {printf("\nYou Chose Volkswagen\n");m=19;break;}
+    else if ((s[0]=='V' || s[0]=='v') && (s[t-1]=='O' || s[t-1]=='o')) {printf("\nYou Chose Volvo\n");m=20;break;}
+    else if ((s[0]=='E' || s[0]=='e') && (s[t-1]=='t' || s[t-1]=='T')) break;
+    else {
+        printf("\nI think you entered wrong spelling\nOr We don't have the car\nPlease Enter Car with correct Spellings with List Given Below:- \n");
+        continue;
     }
+    }
+    carselected(m,firstname,lastname,email);
 }
 
 void carselected(int m,char firstname[100],char lastname[100],char email[100])
@@ -39,14 +85,20 @@ void carselected(int m,char firstname[100],char lastname[100],char email[100])
     else if (m==19) {y = volkswagon();strcpy(carbrand, "Volkswagon");int carprice[8]={30530,44740,24155,20655,34460,43010,35150,26950};changeArray(price,carprice,8);char audicarlist[8][100] = { "Volkswagon Golf GTI", "Volkswagon Golf R", "Volkswagon Taos", "Volkswagon Jetta", "Volkswagon Atlas Cross Sport", "Volkswagon Arteon", "Volkswagon Atlas", "Volkswagon Tiguan"};memcpy(audiarray, audicarlist, sizeof(audicarlist));}
     else if (m==20) {y = volvo();strcpy(carbrand, "Volvo");int carprice[8]={48800,70550,57000,55300,56000,51250,71900,53550};changeArray(price,carprice,8);char audicarlist[8][100] = {"Volvo V60 Cross Crountry B5 AWD", "Volvo V60 Recharge T8", "Volvo S90 Recharge B6 AWD", "Volvo C40 Recharge Twin Motor", "Volvo XC90 B5 AWD", "Volvo S60 Recharge T8 eAWD", "Volvo XC90 Recharge T8 eAWD", "Volvo XC40 Recharge Twin Motor"};memcpy(audiarray, audicarlist, sizeof(audicarlist));}
     
-    if (y==-2) break;
+    if (y==-2) anothercar(firstname,lastname,email);
     else if (y==-1) continue;
     else {
         carpricefromarray = price[y-1];
         strcpy(carfullname, audiarray[y-1]);
-        reciptmode(carfullname,carpricefromarray,carbrand,firstname,lastname,email);
+        reciptlogin(carfullname,carpricefromarray,carbrand,firstname,lastname,email);
         break;
     }
     }
 
+}
+
+void changeArray(int arr1[], int arr2[], int size) {
+    for (int i = 0; i < size; i++) {
+        arr1[i] = arr2[i];
+    }
 }
