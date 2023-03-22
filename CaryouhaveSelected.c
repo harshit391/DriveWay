@@ -3,11 +3,7 @@
 #include "userlogin.c"
 
 
-void changeArray(int arr1[], int arr2[], int size) {
-    for (int i = 0; i < size; i++) {
-        arr1[i] = arr2[i];
-    }
-}
+void changeArray(int arr1[], int arr2[], int size);
 
 void anothercar(char firstname[100],char lastname[100],char email[100])
 {
@@ -99,4 +95,10 @@ void carselected(int m,char firstname[100],char lastname[100],char email[100])
     }
     }
 
+}
+
+void changeArray(int arr1[], int arr2[], int size) {
+    for (int i = 0; i < size; i++) {
+        arr1[i] = arr2[i];
+    }
 }
