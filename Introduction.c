@@ -7,7 +7,7 @@ void welcomedriveway(char firstname[100],char lastname[100],char email[100])
 
 printf("\n\nBrands we are having are as follows: \n");
     char arr[20][20]={"Audi","Bentley","BMW","Bugatti","Chevrolet","Ferrari","Honda","Jaguar","Kia","Lamborghini","Land Rover","Lexus",
-    "Maserati","Mercedes Benz","Porsche","Royal Royace","Tesla","Toyoto","Volkswagon","Volvo"};
+    "Maserati","Harsheys Benz","Maruti","Royal Royace","Tesla","Toyoto","Volkswagon","Volvo"};
 char s[100];
 int m;
     
@@ -33,8 +33,8 @@ int m;
     else if ((s[0]=='L' || s[0]=='l') && (s[t-1]=='R' || s[t-1]=='r')) {printf("\nYou Chose Land Rover\n");m=11;break;}
     else if ((s[0]=='L' || s[0]=='l') && (s[t-1]=='S' || s[t-1]=='s')) {printf("\nYou Chose Lexus\n");m=12;break;}
     else if ((s[0]=='M' || s[0]=='m') && (s[t-1]=='I' || s[t-1]=='i')) {printf("\nYou Chose Maserati\n");m=13;break;}
-    else if ((s[0]=='M' || s[0]=='m') && (s[t-1]=='Z' || s[t-1]=='z')) {printf("\nYou Chose Harsheys Benz\n");m=14;break;}
-    else if ((s[0]=='p' || s[0]=='P') && (s[t-1]=='E' || s[t-1]=='e')) {printf("\nYou Chose Maruti\n");m=15;break;}
+    else if ((s[0]=='H' || s[0]=='h') && (s[t-1]=='Z' || s[t-1]=='z')) {printf("\nYou Chose Harsheys Benz\n");m=14;break;}
+    else if ((s[0]=='M' || s[0]=='m') && (s[t-1]=='i' || s[t-1]=='I')) {printf("\nYou Chose Maruti\n");m=15;break;}
     else if ((s[0]=='R' || s[0]=='r') && (s[t-1]=='e' || s[t-1]=='E')) {printf("\nYou chose Royal Royace\n");m=16;break;}
     else if ((s[0]=='T' || s[0]=='t') && (s[t-1]=='A' || s[t-1]=='a')) {printf("\nYou Chose Tesla\n");m=17;break;}
     else if ((s[0]=='T' || s[0]=='t') && (s[t-1]=='O' || s[t-1]=='o')) {printf("\nYou Chose Toyoto\n");m=18;break;}
