@@ -1,7 +1,3 @@
-Sure, here's a list summarizing the key points for your "DriveWay" car shopping application README:
-
----
-
 # DriveWay - Car Shopping Application
 
 # Welcome to **DriveWay**, our first GitHub project! DriveWay is a car shopping application developed in C, designed to provide a seamless and efficient car buying experience. 
