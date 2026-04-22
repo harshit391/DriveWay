@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include <time.h>
 #include "utils.h"
 
@@ -116,7 +117,6 @@ static void process_payment(int brand_idx, int car_idx,
     /* --- Collect card details (for credit/debit) --- */
     int bank_choice = 0;
     long long card_number = 0;
-    int security_code = 0;
     char billing_address[200] = "";
 
     if (method == 1 || method == 2) {
@@ -135,27 +135,27 @@ static void process_payment(int brand_idx, int car_idx,
 
         /* Card number */
         while (1) {
-            printf("Enter your 10-digit card number: ");
+            printf("Enter your 16-digit card number: ");
             char card_buf[32];
             if (!read_line(card_buf, sizeof(card_buf))) continue;
-            /* Validate: exactly 10 digits */
+            /* Validate: exactly 16 digits */
             int valid = 1;
             int len = (int)strlen(card_buf);
-            if (len != 10) { valid = 0; }
+            if (len != 16) { valid = 0; }
             else {
                 for (int i = 0; i < len; i++) {
                     if (!isdigit((unsigned char)card_buf[i])) { valid = 0; break; }
                 }
             }
             if (!valid) {
-                printf("Invalid card number. Please enter exactly 10 digits.\n");
+                printf("Invalid card number. Please enter exactly 16 digits.\n");
                 continue;
             }
             card_number = atoll(card_buf);
             break;
         }
 
-        /* Security code */
+        /* Security code (validated but not stored — receipt always masks it) */
         while (1) {
             printf("Enter your 4-digit security code: ");
             char sec_buf[16];
@@ -172,13 +172,16 @@ static void process_payment(int brand_idx, int car_idx,
                 printf("Invalid security code. Please enter exactly 4 digits.\n");
                 continue;
             }
-            security_code = atoi(sec_buf);
             break;
         }
 
         /* Billing address */
-        printf("Enter your billing address: ");
-        read_line(billing_address, sizeof(billing_address));
+        while (1) {
+            printf("Enter your billing address: ");
+            if (!read_line(billing_address, sizeof(billing_address))) continue;
+            if (strlen(billing_address) > 0) break;
+            printf("Billing address cannot be empty.\n");
+        }
     }
 
     /* --- Collect additional user info --- */
@@ -217,12 +220,12 @@ static void process_payment(int brand_idx, int car_idx,
     }
 
     /* --- Calculate final price --- */
-    float finalprice;
+    double finalprice;
     if (method == 3) {
         /* Cheque: no discount */
-        finalprice = (float)c->price;
+        finalprice = (double)c->price;
     } else {
-        finalprice = (float)c->price * (1.0f - b->discount_pct / 100.0f);
+        finalprice = (double)c->price * (1.0 - b->discount_pct / 100.0);
     }
 
     /* --- Get current date and delivery date --- */
@@ -232,13 +235,18 @@ static void process_payment(int brand_idx, int car_idx,
 
     time(&rawtime);
     timeinfo = localtime(&rawtime);
+    if (timeinfo == NULL) {
+        printf("Error: unable to determine current date.\n");
+        return;
+    }
     strftime(order_date, sizeof(order_date), "%B %d, %Y", timeinfo);
 
-    srand((unsigned int)time(NULL));
+    /* Copy tm struct so localtime's static buffer isn't reused */
+    struct tm delivery_tm = *timeinfo;
     int rand_months = rand() % 2 + 9; /* 9 or 10 months */
-    timeinfo->tm_mon += rand_months;
-    mktime(timeinfo);
-    strftime(delivery_date, sizeof(delivery_date), "%B %d, %Y", timeinfo);
+    delivery_tm.tm_mon += rand_months;
+    mktime(&delivery_tm); /* mktime normalizes overflows (e.g. month 13 → next year) */
+    strftime(delivery_date, sizeof(delivery_date), "%B %d, %Y", &delivery_tm);
 
     /* --- Print receipt --- */
     printf("\n========================================\n");
@@ -257,14 +265,14 @@ static void process_payment(int brand_idx, int car_idx,
     if (b->discount_pct > 0 && method != 3) {
         printf("Discount:              %d%%\n", b->discount_pct);
     }
-    printf("Price to pay:          $%.2f\n", finalprice);
+    printf("Price to pay:          $%.2lf\n", finalprice);
 
     if (method == 1 || method == 2) {
         const char *bank_names[] = {"World Bank", "HDFC", "ICICI", "City Bank", "Other Bank"};
         printf("\nPayment Method:        %s\n", (method == 1) ? "Credit Card" : "Debit Card");
         printf("Bank:                  %s\n", bank_names[bank_choice - 1]);
         /* Mask card number: show only last 4 digits */
-        printf("Card number:           ******%04lld\n", card_number % 10000);
+        printf("Card number:           ************%04lld\n", card_number % 10000);
         printf("Security code:         ****\n");
         printf("Billing address:       %s\n", billing_address);
     } else {
@@ -281,6 +289,8 @@ static void process_payment(int brand_idx, int car_idx,
 /*  Main Application Loop                                              */
 /* ------------------------------------------------------------------ */
 int main(void) {
+    srand((unsigned int)time(NULL));
+
     char firstname[100], lastname[100], email[100];
 
     get_user_details(firstname, lastname, email);

@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <limits.h>
 #include "car_data.h"
 
 /* Read a line of input safely with bounded length. Returns 1 on success, 0 on failure. */
@@ -22,43 +23,63 @@ static int read_int(int *out) {
     char *end;
     long val = strtol(buf, &end, 10);
     if (end == buf || *end != '\0') return 0;
+    if (val > INT_MAX || val < INT_MIN) return 0;
     *out = (int)val;
     return 1;
 }
 
-/* Validate that a string contains only alphabetic characters. */
+/* Validate that a string contains only alphabetic characters and spaces, with at least one letter. */
 static int validate_alpha(const char *str) {
     if (str[0] == '\0') return 0;
+    int has_alpha = 0;
     for (int i = 0; str[i] != '\0'; i++) {
-        if (!isalpha((unsigned char)str[i]) && str[i] != ' ') return 0;
+        if (isalpha((unsigned char)str[i])) has_alpha = 1;
+        else if (str[i] != ' ') return 0;
     }
-    return 1;
+    return has_alpha;
 }
 
-/* Validate an email address (basic check: has @, has . after @, domain is letters). */
+/* Validate an email address (basic check: exactly one @, has . after @, domain is letters). */
 static int validate_email(const char *email) {
     int len = (int)strlen(email);
     if (len == 0) return 0;
 
-    int at_pos = -1, dot_pos = -1;
+    int at_pos = -1, at_count = 0;
     for (int i = 0; i < len; i++) {
-        if (email[i] == '@') at_pos = i;
-        if (email[i] == '.') dot_pos = i;
+        if (email[i] == '@') {
+            at_pos = i;
+            at_count++;
+        }
     }
 
-    if (at_pos == -1) {
+    if (at_count == 0) {
         printf("Invalid email address: '@' symbol not found.\n");
         return 0;
     }
+    if (at_count > 1) {
+        printf("Invalid email address: multiple '@' symbols found.\n");
+        return 0;
+    }
+    if (at_pos == 0 || at_pos == len - 1) {
+        printf("Invalid email address format.\n");
+        return 0;
+    }
+
+    /* Find the first '.' after '@' */
+    int dot_pos = -1;
+    for (int i = at_pos + 1; i < len; i++) {
+        if (email[i] == '.') { dot_pos = i; break; }
+    }
+
     if (dot_pos == -1) {
-        printf("Invalid email address: '.' symbol not found.\n");
+        printf("Invalid email address: '.' symbol not found after '@'.\n");
         return 0;
     }
-    if (at_pos > dot_pos) {
-        printf("Invalid email address: '@' symbol found after '.' symbol.\n");
+    if (dot_pos == at_pos + 1) {
+        printf("Invalid email address: no domain name between '@' and '.'.\n");
         return 0;
     }
-    if (at_pos == 0 || dot_pos == len - 1) {
+    if (dot_pos == len - 1) {
         printf("Invalid email address format.\n");
         return 0;
     }
@@ -93,12 +114,6 @@ static int ask_yes_no(const char *prompt) {
         if (buf[0] == 'N' || buf[0] == 'n') return 0;
         printf("Please enter Yes or No only.\n");
     }
-}
-
-/* Clear the input buffer (used after scanf failures). */
-static void clear_input(void) {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
 }
 
 #endif

@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra
+CFLAGS = -std=c99 -Wall -Wextra
 TARGET = driveway
 
 all: $(TARGET)

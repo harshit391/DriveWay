@@ -74,7 +74,7 @@ static Brand brands[NUM_BRANDS] = {
     {"Chevrolet", 10, {
         {"Chevrolet Suburban High Country RWD",                      "Suburban",    58795, 420, 154, "mph", 7.2f, "0 to 60 mph in seconds", 460, "lb-ft", 6.200f, "CC"},
         {"Chevrolet Tahoe High Country RWD",                         "Tahoe",       56095, 420, 124, "mph", 5.8f, "0 to 60 mph in seconds", 460, "lb-ft", 6.200f, "CC"},
-        {"Chevrolet Trailblazer Active FWD",                         "Trailblazer", 23395, 155, 199, "mph", 8.7f, "0 to 60 mph in seconds", 174, "lb-ft", 1.300f, "CC"},
+        {"Chevrolet Trailblazer Active FWD",                         "Trailblazer", 23395, 155, 124, "mph", 8.7f, "0 to 60 mph in seconds", 174, "lb-ft", 1.300f, "CC"},
         {"Chevrolet Bolt EV 2LT",                                    "Bolt EV",     27495, 200,  90, "mph", 6.7f, "0 to 60 mph in seconds", 266, "lb-ft", 7.500f, "Charging Hours"},
         {"Chevrolet Blazer RS FWD",                                  "Blazer",      36495, 308, 130, "mph", 6.3f, "0 to 60 mph in seconds", 270, "lb-ft", 3.600f, "CC"},
         {"Chevrolet Silverado 1500 LTZ Crew Cab Short Bed 2WD",     "Silverado",   38195, 355, 125, "mph", 5.4f, "0 to 60 mph in seconds", 383, "lb-ft", 5.300f, "CC"},
@@ -116,10 +116,10 @@ static Brand brands[NUM_BRANDS] = {
 
     /* 8: Kia — 10% discount, 8 cars */
     {"Kia", 10, {
-        {"Kia Sportage LX",  "Sportage",  26290, 187, 125, "mph", 8.2f, "0 to 70 mph in seconds", 178, "lb-ft", 2.497f, "CC"},
-        {"Kia Sorento LX",   "Sorento",   30090, 191, 124, "mph", 7.7f, "0 to 70 mph in seconds", 181, "lb-ft", 2.497f, "CC"},
-        {"Kia Carnival MPV",  "Carnival",  33100, 290, 190, "mph", 7.5f, "0 to 70 mph in seconds", 262, "lb-ft", 3.470f, "CC"},
-        {"Kia K5 LXS",       "K5",        25290, 180, 155, "mph", 5.7f, "0 to 70 mph in seconds", 195, "lb-ft", 1.598f, "CC"},
+        {"Kia Sportage LX",  "Sportage",  26290, 187, 125, "mph", 8.2f, "0 to 60 mph in seconds", 178, "lb-ft", 2.497f, "CC"},
+        {"Kia Sorento LX",   "Sorento",   30090, 191, 124, "mph", 7.7f, "0 to 60 mph in seconds", 181, "lb-ft", 2.497f, "CC"},
+        {"Kia Carnival MPV",  "Carnival",  33100, 290, 118, "mph", 7.5f, "0 to 60 mph in seconds", 262, "lb-ft", 3.470f, "CC"},
+        {"Kia K5 LXS",       "K5",        25290, 180, 155, "mph", 5.7f, "0 to 60 mph in seconds", 195, "lb-ft", 1.598f, "CC"},
         {"Kia EV6 Wind",     "EV6",       48700, 225, 160, "mph", 3.5f, "0 to 60 mph in seconds", 258, "lb-ft", 7.250f, "Charging Hours"},
         {"Kia Telluride LX", "Telluride", 35890, 291, 132, "mph", 7.2f, "0 to 60 mph in seconds", 262, "lb-ft", 3.778f, "CC"},
         {"Kia Soul LX",      "Soul",      19890, 147, 128, "mph", 6.4f, "0 to 60 mph in seconds", 132, "lb-ft", 1.998f, "CC"},
@@ -130,8 +130,8 @@ static Brand brands[NUM_BRANDS] = {
     {"Lamborghini", 0, {
         {"Lamborghini Aventador SVJ",       "Aventador SVJ",       699000, 760, 350, "kmh", 2.8f, "0 to 100 kmh in seconds", 720, "newton-metre", 6.498f, "CC"},
         {"Lamborghini Huracan Sterrato",    "Huracan Sterrato",    274000, 600, 260, "kmh", 3.4f, "0 to 100 kmh in seconds", 560, "newton-metre", 5.204f, "CC"},
-        {"Lamborghini Huracan Tecnica",     "Huracan Tecnica",     239000, 450, 325, "kmh", 3.2f, "0 to 100 kmh in seconds", 565, "newton-metre", 5.204f, "CC"},
-        {"Lamborghini Huracan STO",         "Huracan STO",         333000, 460, 310, "kmh", 3.0f, "0 to 100 kmh in seconds", 565, "newton-metre", 5.204f, "CC"},
+        {"Lamborghini Huracan Tecnica",     "Huracan Tecnica",     239000, 630, 325, "kmh", 3.2f, "0 to 100 kmh in seconds", 565, "newton-metre", 5.204f, "CC"},
+        {"Lamborghini Huracan STO",         "Huracan STO",         333000, 630, 310, "kmh", 3.0f, "0 to 100 kmh in seconds", 565, "newton-metre", 5.204f, "CC"},
         {"Lamborghini Huracan EVO Spyder",  "Huracan EVO Spyder",  268000, 630, 325, "kmh", 3.1f, "0 to 100 kmh in seconds", 600, "newton-metre", 5.204f, "CC"},
         {"Lamborghini Urus S",              "Urus S",              230000, 650, 305, "kmh", 3.5f, "0 to 100 kmh in seconds", 850, "newton-metre", 3.996f, "CC"},
         {"Lamborghini Countach LPI 800-4",  "Countach",           2600000, 800, 355, "kmh", 2.8f, "0 to 100 kmh in seconds", 720, "newton-metre", 6.498f, "CC"},
@@ -140,12 +140,12 @@ static Brand brands[NUM_BRANDS] = {
 
     /* 10: Land Rover — 5% discount, 6 cars */
     {"Land Rover", 5, {
-        {"Land Rover Range Rover Sport Dynamic", "Range Rover Sport",  83000, 350, 145, "kmh", 6.0f, "0 to 100 kmh in seconds", 516, "newton-metre", 2.997f, "CC"},
-        {"Land Rover Defender S",                "Defender",           68000, 296, 119, "kmh", 7.5f, "0 to 100 kmh in seconds", 295, "newton-metre", 2.996f, "CC"},
-        {"Land Rover Discovery S",               "Discovery",         58400, 296, 125, "kmh", 6.9f, "0 to 100 kmh in seconds", 295, "newton-metre", 1.997f, "CC"},
-        {"Land Rover Range Rover SE",            "Range Rover",      106500, 395, 150, "kmh", 5.5f, "0 to 100 kmh in seconds", 406, "newton-metre", 2.997f, "CC"},
-        {"Land Rover Range Rover Evoque SE",     "Range Rover Evoque",51000, 246, 143, "kmh", 7.0f, "0 to 100 kmh in seconds", 269, "newton-metre", 1.997f, "CC"},
-        {"Land Rover Range Rover Velar S",       "Range Rover Velar", 61500, 247, 135, "kmh", 7.1f, "0 to 100 kmh in seconds", 269, "newton-metre", 1.998f, "CC"},
+        {"Land Rover Range Rover Sport Dynamic", "Range Rover Sport",  83000, 350, 145, "mph", 6.0f, "0 to 60 mph in seconds", 516, "newton-metre", 2.997f, "CC"},
+        {"Land Rover Defender S",                "Defender",           68000, 296, 119, "mph", 7.5f, "0 to 60 mph in seconds", 295, "newton-metre", 2.996f, "CC"},
+        {"Land Rover Discovery S",               "Discovery",         58400, 296, 125, "mph", 6.9f, "0 to 60 mph in seconds", 295, "newton-metre", 1.997f, "CC"},
+        {"Land Rover Range Rover SE",            "Range Rover",      106500, 395, 150, "mph", 5.5f, "0 to 60 mph in seconds", 406, "newton-metre", 2.997f, "CC"},
+        {"Land Rover Range Rover Evoque SE",     "Range Rover Evoque",51000, 246, 143, "mph", 7.0f, "0 to 60 mph in seconds", 269, "newton-metre", 1.997f, "CC"},
+        {"Land Rover Range Rover Velar S",       "Range Rover Velar", 61500, 247, 135, "mph", 7.1f, "0 to 60 mph in seconds", 269, "newton-metre", 1.998f, "CC"},
     }, 6},
 
     /* 11: Lexus — 5% discount, 8 cars */
@@ -162,11 +162,11 @@ static Brand brands[NUM_BRANDS] = {
 
     /* 12: Maserati — 3% discount, 5 cars */
     {"Maserati", 3, {
-        {"Maserati Grecale GT",          "Grecale",      63500, 300, 240, "mph", 5.6f, "0 to 60 mph in seconds", 450, "lb-ft", 2.995f, "CC"},
-        {"Maserati Levante Trofeo",      "Levante",      90700, 580, 302, "mph", 4.1f, "0 to 60 mph in seconds", 730, "lb-ft", 3.799f, "CC"},
-        {"Maserati Ghibli Trofeo",       "Ghibli",       85300, 570, 326, "mph", 4.3f, "0 to 60 mph in seconds", 730, "lb-ft", 3.799f, "CC"},
-        {"Maserati MC20 Cielo",          "MC20",        250000, 630, 320, "mph", 2.8f, "0 to 60 mph in seconds", 730, "lb-ft", 3.000f, "CC"},
-        {"Maserati Quattroporte Trofeo", "Quattroporte",145900, 580, 326, "mph", 4.5f, "0 to 60 mph in seconds", 730, "lb-ft", 3.799f, "CC"},
+        {"Maserati Grecale GT",          "Grecale",      63500, 300, 240, "kmh", 5.6f, "0 to 100 kmh in seconds", 450, "newton-metre", 2.995f, "CC"},
+        {"Maserati Levante Trofeo",      "Levante",      90700, 580, 302, "kmh", 4.1f, "0 to 100 kmh in seconds", 730, "newton-metre", 3.799f, "CC"},
+        {"Maserati Ghibli Trofeo",       "Ghibli",       85300, 570, 326, "kmh", 4.3f, "0 to 100 kmh in seconds", 730, "newton-metre", 3.799f, "CC"},
+        {"Maserati MC20 Cielo",          "MC20",        250000, 630, 320, "kmh", 2.8f, "0 to 100 kmh in seconds", 730, "newton-metre", 3.000f, "CC"},
+        {"Maserati Quattroporte Trofeo", "Quattroporte",145900, 580, 326, "kmh", 4.5f, "0 to 100 kmh in seconds", 730, "newton-metre", 3.799f, "CC"},
     }, 5},
 
     /* 13: Mercedes Benz — 5% discount, 8 cars */

@@ -13,7 +13,7 @@ A console-based car shopping application built in C. Browse 20 major car brands,
 - **Full Spec Display** — View complete technical specifications for any car
 - **Payment Processing** — Credit card, debit card, and cheque options with bank selection
 - **Brand-Based Discounts** — Automatic discounts (3%-10%) depending on the brand and payment method
-- **Secure Receipts** — Card numbers are masked (only last 4 digits shown), security codes hidden
+- **Secure Receipts** — 16-digit card numbers are masked (only last 4 digits shown), security codes hidden
 - **Delivery Estimate** — Auto-generated delivery date (9-10 months from order)
 
 ## Demo
@@ -141,7 +141,7 @@ make
 Or compile directly without make:
 
 ```bash
-gcc -Wall -Wextra -o driveway main.c
+gcc -std=c99 -Wall -Wextra -o driveway main.c
 ./driveway
 ```
 
@@ -165,7 +165,7 @@ gcc -Wall -Wextra -o driveway main.c
 ## Tech Stack
 
 - **Language:** C (ISO C99)
-- **Libraries:** Standard only — `stdio.h`, `string.h`, `stdlib.h`, `time.h`, `ctype.h`
+- **Libraries:** Standard only — `stdio.h`, `string.h`, `stdlib.h`, `time.h`, `ctype.h`, `limits.h`
 - **Build:** GNU Make / GCC
 - **Platform:** Cross-platform (Windows, macOS, Linux)
 
